@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Shift - FixMySched</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f1f1f1;
+            padding: 40px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Shift</h2>
+        <form method="POST">
+            <label for="shift_date">Date</label>
+            <input type="date" name="shift_date" value="{{ shift[1] }}" required>
+
+            <label for="shift_time">Shift Time</label>
+            <select name="shift_time" required>
+                <option value="Morning" {% if shift[2] == 'Morning' %}selected{% endif %}>Morning</option>
+                <option value="Evening" {% if shift[2] == 'Evening' %}selected{% endif %}>Evening</option>
+                <option value="Night" {% if shift[2] == 'Night' %}selected{% endif %}>Night</option>
+            </select>
+
+            <label for="department">Department</label>
+            <input type="text" name="department" value="{{ shift[3] }}" required>
+
+            <label for="notes">Notes</label>
+            <textarea name="notes" rows="3">{{ shift[4] }}</textarea>
+
+            <button type="submit">Update Shift</button>
+        </form>
+        <div class="back-link">
+            <a href="{{ url_for('schedule') }}">← Back to Schedule</a>
+        </div>
+    </div>
+</body>
+</html>

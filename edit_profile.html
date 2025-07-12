@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile - FixMySched</title>
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .back a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="full_name" placeholder="Full Name" value="{{ user[0] }}" required>
+            <input type="email" name="email" placeholder="Email" value="{{ user[1] }}" required>
+            <input type="text" name="phone" placeholder="Phone" value="{{ user[2] }}" required>
+            <select name="department" required>
+                <option value="">Select Department</option>
+                <option value="Surgery" {% if user[3] == 'Surgery' %}selected{% endif %}>Surgery</option>
+                <option value="Pediatrics" {% if user[3] == 'Pediatrics' %}selected{% endif %}>Pediatrics</option>
+                <option value="Radiology" {% if user[3] == 'Radiology' %}selected{% endif %}>Radiology</option>
+                <option value="Emergency" {% if user[3] == 'Emergency' %}selected{% endif %}>Emergency</option>
+            </select>
+            <textarea name="address" placeholder="Address" required>{{ user[4] }}</textarea>
+            <input type="file" name="photo" accept="image/*">
+            <button type="submit">Update Profile</button>
+        </form>
+        <div class="back">
+            <a href="{{ url_for('profile') }}">Back to Profile</a>
+        </div>
+    </div>
+</body>
+</html>

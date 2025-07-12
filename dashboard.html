@@ -5,40 +5,76 @@
     <title>FixMySched - Dashboard</title>
     <style>
         body {
-            background: #f9f9f9;
             font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f2f5;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            margin: 0;
         }
-        h1 {
-            color: #333;
+
+        .dashboard-card {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 28px;
             margin-bottom: 10px;
+            color: #333;
         }
+
         p {
-            color: #666;
-            margin-bottom: 20px;
+            color: #777;
+            margin-bottom: 30px;
         }
-        a {
-            text-decoration: none;
-            background: #333;
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            font-size: 16px;
+            background-color: #007bff;
             color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            transition: background 0.3s ease;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
-        a:hover {
-            background: #000;
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .logout {
+            background-color: #343a40;
+        }
+
+        .logout:hover {
+            background-color: #1d2124;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome, {{ username }}!</h1>
-    <p>This is your FixMySched Dashboard.</p>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <div class="dashboard-card">
+        <h2>Welcome, {{ username }}!</h2>
+        <p>This is your FixMySched Dashboard.</p>
+
+        <a href="{{ url_for('logout') }}" class="btn logout">Logout</a>
+        <a href="{{ url_for('profile') }}" class="btn">View My Profile</a>
+        <a href="{{ url_for('schedule') }}">View Schedule</a>
+        <a href="{{ url_for('calendar') }}" class="btn">📅 View Shift Calendar</a>
+        {% if session.get('is_admin') %}
+    <a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a>
+   {% endif %}
+
+    </div>
 </body>
 </html>
+
 

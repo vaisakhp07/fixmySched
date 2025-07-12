@@ -1,0 +1,13 @@
+<h2>Add New Shift</h2>
+<form method="POST">
+    <label>Date:</label><input type="date" name="shift_date" required><br>
+    <label>Time:</label>
+    <select name="shift_time">
+        <option value="Morning">Morning</option>
+        <option value="Evening">Evening</option>
+        <option value="Night">Night</option>
+    </select><br>
+    <label>Department:</label><input type="text" name="department"><br>
+    <label>Notes:</label><textarea name="notes"></textarea><br>
+    <button type="submit">Save</button>
+</form>
