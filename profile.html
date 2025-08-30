@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ username }}'s Profile - FixMySched</title>
+    <title>{{ user['username'] }}'s Profile - FixMySched</title>
     <style>
         * {
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f0f2f5;
@@ -18,7 +17,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .profile-card {
             background: white;
             padding: 40px;
@@ -28,7 +26,6 @@
             max-width: 480px;
             text-align: center;
         }
-
         .profile-card img {
             width: 120px;
             height: 120px;
@@ -37,19 +34,16 @@
             margin-bottom: 20px;
             border: 3px solid #007bff;
         }
-
         .profile-card h2 {
             margin-bottom: 10px;
             color: #333;
             font-size: 24px;
         }
-
         .profile-field {
             margin: 12px 0;
             font-size: 16px;
             color: #555;
         }
-
         .profile-field span {
             font-weight: bold;
             color: #222;
@@ -58,7 +52,6 @@
             text-align: right;
             margin-right: 10px;
         }
-
         .btn {
             margin-top: 30px;
             padding: 12px 24px;
@@ -71,11 +64,9 @@
             cursor: pointer;
             text-decoration: none;
         }
-
         .btn:hover {
             background-color: #0056b3;
         }
-
         @media (max-width: 500px) {
             .profile-field span {
                 display: block;
@@ -87,24 +78,29 @@
 </head>
 <body>
 
-    <div class="profile-card">
-        {% if user[5] %}
-            <img src="{{ url_for('static', filename='uploads/' + user[5]) }}" alt="Profile Photo">
-        {% else %}
-            <img src="{{ url_for('static', filename='default_profile.png') }}" alt="Default Photo">
-        {% endif %}
+<div class="profile-card">
+    {% if user['photo'] %}
+        <img src="{{ url_for('static', filename='uploads/' + user['photo']) }}" alt="Profile Photo">
+    {% else %}
+        <img src="{{ url_for('static', filename='default_profile.png') }}" alt="Default Photo">
+    {% endif %}
 
-        <h2>{{ user[0] }}</h2>
+    <h2>{{ user['full_name'] }}</h2>
 
-        <div class="profile-field"><span>Email:</span> {{ user[1] }}</div>
-        <div class="profile-field"><span>Phone:</span> {{ user[2] }}</div>
-        <div class="profile-field"><span>Department:</span> {{ user[3] }}</div>
-        <div class="profile-field"><span>Address:</span> {{ user[4] }}</div>
+    <div class="profile-field"><span>Username:</span> {{ user['username'] }}</div>
+    <div class="profile-field"><span>Email:</span> {{ user['email'] }}</div>
+    <div class="profile-field"><span>Phone:</span> {{ user['phone'] }}</div>
+    <div class="profile-field"><span>Department:</span> {{ user['department'] }}</div>
+    <div class="profile-field"><span>Address:</span> {{ user['address'] }}</div>
 
-        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
-        <a href="{{ url_for('edit_profile') }}" class="btn" style="margin-left: 10px;">Edit Profile</a>
+    <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+    {% if session['is_admin'] and user['username'] != session['username'] %}
+    <a href="{{ url_for('admin_edit_profile', username=user['username']) }}" class="btn">Edit Profile</a>
+{% else %}
+    <a href="{{ url_for('edit_profile') }}" class="btn">Edit Profile</a>
+{% endif %}
 
-    </div>
+</div>
 
 </body>
 </html>

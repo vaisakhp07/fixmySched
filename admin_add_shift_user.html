@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Shift for {{ username }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: none;
+            height: 60px;
+        }
+        .btn {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .back-link {
+            display: block;
+            margin-top: 12px;
+            text-align: center;
+            text-decoration: none;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Shift for {{ username }}</h2>
+        <form method="POST">
+            <label for="date">Date:</label>
+            <input type="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="text" name="time" placeholder="e.g. 09:00-17:00" required>
+
+            <label for="department">Department:</label>
+            <select name="department" required>
+                <option value="">-- Select Department --</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Radiology">Radiology</option>
+                <option value="Emergency">Emergency</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Neurology">Neurology</option>
+            </select>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" placeholder="Optional notes..."></textarea>
+
+            <button type="submit" class="btn">Add Shift</button>
+        </form>
+        <a href="{{ url_for('admin_dashboard') }}" class="back-link">⬅ Back to Dashboard</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- admin_edit_shift.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Shift (Admin)</title>
+</head>
+<body>
+    <h2>Edit Shift</h2>
+    <form method="POST">
+        <label>Date:</label>
+        <input type="date" name="shift_date" value="{{ shift[3] }}" required><br>
+
+        <label>Time:</label>
+        <input type="text" name="shift_time" value="{{ shift[4] }}" required><br>
+
+        <label>Department:</label>
+        <input type="text" name="department" value="{{ shift[5] }}" required><br>
+
+        <label>Notes:</label>
+        <input type="text" name="notes" value="{{ shift[6] }}"><br>
+
+        <button type="submit">Update Shift</button>
+    </form>
+    <a href="{{ url_for('admin_schedules') }}">Back to Schedules</a>
+</body>
+</html>
+
