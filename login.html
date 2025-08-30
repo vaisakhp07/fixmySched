@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FixMySched - Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            flex-direction: column;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .flash {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .link {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .link a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid transparent;
+        }
+
+        .link a:hover {
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="app-title">FixMySched</div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="link">
+            Don't have an account?
+            <a href="{{ url_for('register') }}">Register here</a>
+        </div>
+
+        <div class="footer-text">
+            © 2025 FixMySched
+        </div>
+    </div>
+
+</body>
+</html>
